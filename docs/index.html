@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AI Search for Houzez — Complete Setup & Configuration Guide</title>
+	<meta name="description" content="Self-contained offline documentation and reference manual for AI Search for Houzez WordPress plugin.">
+	<style>
+		:root {
+			--primary: #25ADDE;
+			--primary-dark: #1b8eb8;
+			--primary-light: #e0f2fe;
+			--accent: #0f172a;
+			--slate-50: #f8fafc;
+			--slate-100: #f1f5f9;
+			--slate-200: #e2e8f0;
+			--slate-300: #cbd5e1;
+			--slate-400: #94a3b8;
+			--slate-500: #64748b;
+			--slate-600: #475569;
+			--slate-700: #334155;
+			--slate-800: #1e293b;
+			--slate-900: #0f172a;
+			--success: #10b981;
+			--success-bg: #ecfdf5;
+			--warning: #f59e0b;
+			--warning-bg: #fffbeb;
+			--danger: #ef4444;
+			--danger-bg: #fef2f2;
+			--card-bg: #ffffff;
+			--radius-sm: 6px;
+			--radius-md: 10px;
+			--radius-lg: 16px;
+			--shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+			--shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+			--shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.08);
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+			background-color: var(--slate-50);
+			color: var(--slate-800);
+			line-height: 1.6;
+			font-size: 15px;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		/* Header */
+		.doc-header {
+			background: #ffffff;
+			border-bottom: 1px solid var(--slate-200);
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			padding: 14px 28px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.doc-header-left {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.doc-logo-icon {
+			width: 36px;
+			height: 36px;
+			background: var(--primary);
+			border-radius: 9px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			box-shadow: 0 2px 8px rgba(37, 173, 222, 0.3);
+		}
+
+		.doc-header-title {
+			font-size: 17px;
+			font-weight: 700;
+			color: var(--slate-900);
+		}
+
+		.doc-version-badge {
+			font-size: 11px;
+			font-weight: 700;
+			background: var(--primary-light);
+			color: #0369a1;
+			padding: 2px 8px;
+			border-radius: 12px;
+			margin-left: 6px;
+		}
+
+		.doc-search-input {
+			padding: 8px 14px 8px 34px;
+			border: 1px solid var(--slate-200);
+			border-radius: var(--radius-sm);
+			background: var(--slate-50);
+			font-size: 13.5px;
+			width: 240px;
+			color: var(--slate-800);
+			outline: none;
+			transition: all 0.2s ease;
+		}
+
+		.doc-search-input:focus {
+			background: #fff;
+			border-color: var(--primary);
+			box-shadow: 0 0 0 3px rgba(37, 173, 222, 0.15);
+			width: 300px;
+		}
+
+		.doc-search-wrap {
+			position: relative;
+		}
+
+		.doc-search-wrap svg {
+			position: absolute;
+			left: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+			stroke: var(--slate-400);
+			pointer-events: none;
+		}
+
+		/* Main Layout */
+		.doc-container {
+			max-width: 1320px;
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: 280px minmax(0, 1fr);
+			gap: 36px;
+			padding: 30px 24px 80px;
+		}
+
+		/* Sidebar Nav */
+		.doc-sidebar {
+			position: sticky;
+			top: 85px;
+			height: calc(100vh - 110px);
+			overflow-y: auto;
+			padding-right: 12px;
+		}
+
+		.doc-sidebar::-webkit-scrollbar {
+			width: 5px;
+		}
+		.doc-sidebar::-webkit-scrollbar-thumb {
+			background: var(--slate-200);
+			border-radius: 4px;
+		}
+
+		.doc-nav-section-title {
+			font-size: 11px;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			color: var(--slate-400);
+			margin: 18px 0 8px 10px;
+		}
+
+		.doc-nav-section-title:first-child {
+			margin-top: 0;
+		}
+
+		.doc-nav-list {
+			list-style: none;
+		}
+
+		.doc-nav-item a {
+			display: flex;
+			align-items: center;
+			gap: 9px;
+			padding: 7px 12px;
+			font-size: 13.5px;
+			font-weight: 500;
+			color: var(--slate-600);
+			text-decoration: none;
+			border-radius: var(--radius-sm);
+			transition: all 0.15s ease;
+		}
+
+		.doc-nav-item a:hover {
+			background: var(--slate-100);
+			color: var(--slate-900);
+		}
+
+		.doc-nav-item a.active {
+			background: var(--primary-light);
+			color: #0369a1;
+			font-weight: 700;
+		}
+
+		.doc-nav-item svg {
+			stroke: currentColor;
+			flex-shrink: 0;
+		}
+
+		/* Content */
+		.doc-content {
+			min-width: 0;
+		}
+
+		.doc-section {
+			background: var(--card-bg);
+			border: 1px solid var(--slate-200);
+			border-radius: var(--radius-md);
+			padding: 36px 40px;
+			margin-bottom: 32px;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.doc-section-header {
+			margin-bottom: 24px;
+			padding-bottom: 16px;
+			border-bottom: 1px solid var(--slate-100);
+		}
+
+		h1.doc-main-title {
+			font-size: 26px;
+			font-weight: 800;
+			color: var(--slate-900);
+			margin-bottom: 8px;
+			letter-spacing: -0.02em;
+		}
+
+		h2.doc-section-title {
+			font-size: 20px;
+			font-weight: 700;
+			color: var(--slate-900);
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-bottom: 6px;
+			letter-spacing: -0.01em;
+		}
+
+		h3.doc-sub-title {
+			font-size: 16px;
+			font-weight: 700;
+			color: var(--slate-800);
+			margin: 24px 0 12px 0;
+		}
+
+		p {
+			margin-bottom: 14px;
+			color: var(--slate-600);
+			line-height: 1.65;
+		}
+
+		p strong {
+			color: var(--slate-900);
+		}
+
+		/* Callout Boxes */
+		.doc-callout {
+			padding: 16px 20px;
+			border-radius: var(--radius-sm);
+			margin: 18px 0;
+			display: flex;
+			gap: 14px;
+			align-items: flex-start;
+			border-left: 4px solid;
+		}
+
+		.doc-callout-info {
+			background: #f0f9ff;
+			border-color: #0284c7;
+			color: #0c4a6e;
+		}
+
+		.doc-callout-success {
+			background: var(--success-bg);
+			border-color: var(--success);
+			color: #064e3b;
+		}
+
+		.doc-callout-warning {
+			background: var(--warning-bg);
+			border-color: var(--warning);
+			color: #78350f;
+		}
+
+		.doc-callout-icon {
+			flex-shrink: 0;
+			margin-top: 2px;
+		}
+
+		.doc-callout-text {
+			font-size: 14px;
+			line-height: 1.55;
+		}
+
+		.doc-callout-text strong {
+			color: inherit;
+		}
+
+		/* Field Reference Cards */
+		.doc-field-card {
+			background: var(--slate-50);
+			border: 1px solid var(--slate-200);
+			border-radius: var(--radius-sm);
+			padding: 20px 24px;
+			margin-bottom: 20px;
+			transition: border-color 0.2s ease;
+		}
+
+		.doc-field-card:hover {
+			border-color: var(--slate-300);
+		}
+
+		.doc-field-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 8px;
+			flex-wrap: wrap;
+			gap: 8px;
+		}
+
+		.doc-field-name {
+			font-size: 16px;
+			font-weight: 700;
+			color: var(--slate-900);
+		}
+
+		.doc-field-type {
+			font-family: monospace;
+			font-size: 12px;
+			background: #e2e8f0;
+			color: var(--slate-700);
+			padding: 2px 7px;
+			border-radius: 4px;
+		}
+
+		.doc-field-meta {
+			display: flex;
+			gap: 10px;
+			font-size: 12px;
+			color: var(--slate-500);
+			margin-bottom: 10px;
+		}
+
+		.doc-field-meta span strong {
+			color: var(--slate-700);
+		}
+
+		/* Tables */
+		.doc-table-wrap {
+			overflow-x: auto;
+			margin: 18px 0;
+			border: 1px solid var(--slate-200);
+			border-radius: var(--radius-sm);
+		}
+
+		.doc-table {
+			width: 100%;
+			border-collapse: collapse;
+			text-align: left;
+			font-size: 13.5px;
+		}
+
+		.doc-table th {
+			background: var(--slate-100);
+			padding: 12px 16px;
+			font-weight: 700;
+			color: var(--slate-800);
+			border-bottom: 1px solid var(--slate-200);
+		}
+
+		.doc-table td {
+			padding: 12px 16px;
+			border-bottom: 1px solid var(--slate-100);
+			color: var(--slate-700);
+			vertical-align: top;
+		}
+
+		.doc-table tr:last-child td {
+			border-bottom: none;
+		}
+
+		.doc-table tr:hover td {
+			background: #fafafa;
+		}
+
+		/* Code Blocks */
+		.doc-code-inline {
+			font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+			font-size: 13px;
+			background: #f1f5f9;
+			color: #0f172a;
+			padding: 2px 6px;
+			border-radius: 4px;
+			border: 1px solid #e2e8f0;
+		}
+
+		.doc-code-block {
+			background: #0f172a;
+			color: #f8fafc;
+			padding: 18px 22px;
+			border-radius: var(--radius-sm);
+			font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+			font-size: 13.5px;
+			line-height: 1.6;
+			overflow-x: auto;
+			margin: 14px 0;
+			position: relative;
+		}
+
+		/* Steps list */
+		.doc-steps {
+			list-style: none;
+			counter-reset: doc-step-counter;
+			margin: 20px 0;
+		}
+
+		.doc-step-item {
+			position: relative;
+			padding-left: 46px;
+			margin-bottom: 22px;
+		}
+
+		.doc-step-item::before {
+			counter-increment: doc-step-counter;
+			content: counter(doc-step-counter);
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 30px;
+			height: 30px;
+			background: var(--primary);
+			color: #ffffff;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 13px;
+			font-weight: 700;
+		}
+
+		.doc-step-title {
+			font-size: 15.5px;
+			font-weight: 700;
+			color: var(--slate-900);
+			margin-bottom: 4px;
+		}
+
+		/* Footer */
+		.doc-footer {
+			text-align: center;
+			padding: 30px 20px;
+			font-size: 13px;
+			color: var(--slate-500);
+			border-top: 1px solid var(--slate-200);
+			background: #fff;
+		}
+
+		.doc-footer a {
+			color: var(--primary);
+			text-decoration: none;
+			font-weight: 600;
+		}
+
+		.doc-footer a:hover {
+			text-decoration: underline;
+		}
+
+		/* Responsive */
+		@media (max-width: 960px) {
+			.doc-container {
+				grid-template-columns: 1fr;
+				padding: 20px 16px;
+			}
+			.doc-sidebar {
+				display: none;
+			}
+			.doc-section {
+				padding: 24px 20px;
+			}
+			.doc-search-input {
+				width: 180px;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<!-- TOP NAVBAR -->
+	<header class="doc-header">
+		<div class="doc-header-left">
+			<div class="doc-logo-icon">
+				<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M2.77302 8.60866C2.55626 8.82542 2.69174 9.20476 2.98978 9.20476H4.29034L9.98034 4.15554L15.6703 9.20476H16.9709C17.2689 9.20476 17.4044 8.82542 17.1877 8.63576L10.9557 3.10833C10.4138 2.59353 9.54681 2.59353 9.00488 3.10833L2.77302 8.60866Z" fill="white"/>
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M10 7.44141C12.2544 7.44141 14.082 9.26025 14.082 11.5039C14.082 13.7476 11.8066 16.3672 10 17.168C8.19336 16.3672 5.91797 13.7476 5.91797 11.5039C5.91797 9.26025 7.74556 7.44141 10 7.44141ZM9.19666 10.2422L8.77913 11.5018L7.52649 11.9217V12.1794L8.77913 12.5993L9.19666 13.859H9.4529L9.87043 12.5993L11.1231 12.1794V11.9217L9.87043 11.5018L9.4529 10.2422H9.19666ZM11.3574 9.15577L11.1424 9.80431L10.4975 10.0205V10.2782L11.1424 10.4943L11.3574 11.1429H11.6136L11.8286 10.4943L12.4735 10.2782V10.0205L11.8286 9.80431L11.6136 9.15577H11.3574Z" fill="white"/>
+				</svg>
+			</div>
+			<div class="doc-header-title">
+				AI Search for Houzez
+				<span class="doc-version-badge">Documentation v1.0.0</span>
+			</div>
+		</div>
+		<div class="doc-search-wrap">
+			<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+			<input type="text" id="doc-filter-input" class="doc-search-input" placeholder="Search documentation..." />
+		</div>
+	</header>
+
+	<div class="doc-container">
+
+		<!-- LEFT STICKY NAVIGATION -->
+		<aside class="doc-sidebar">
+			<div class="doc-nav-section-title">Getting Started</div>
+			<ul class="doc-nav-list">
+				<li class="doc-nav-item"><a href="#overview"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Overview & Features</a></li>
+				<li class="doc-nav-item"><a href="#installation"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Installation & Activation</a></li>
+				<li class="doc-nav-item"><a href="#api-keys"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Entering API Keys</a></li>
+			</ul>
+
+			<div class="doc-nav-section-title">AI Engine & Models</div>
+			<ul class="doc-nav-list">
+				<li class="doc-nav-item"><a href="#providers"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg> Supported Providers</a></li>
+				<li class="doc-nav-item"><a href="#primary-vs-lite"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg> Primary vs Lite Model</a></li>
+				<li class="doc-nav-item"><a href="#system-prompt"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Custom Prompt Guidelines</a></li>
+			</ul>
+
+			<div class="doc-nav-section-title">Settings & Reference</div>
+			<ul class="doc-nav-list">
+				<li class="doc-nav-item"><a href="#fields-reference"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg> Field-by-Field Reference</a></li>
+				<li class="doc-nav-item"><a href="#location-aliases"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Location Resolver & Aliases</a></li>
+				<li class="doc-nav-item"><a href="#homepage-installer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> 1-Click Homepage Installer</a></li>
+				<li class="doc-nav-item"><a href="#rate-limiting"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Rate Limiting & Safety</a></li>
+			</ul>
+
+			<div class="doc-nav-section-title">Support & Ecosystem</div>
+			<ul class="doc-nav-list">
+				<li class="doc-nav-item"><a href="#houzi-app"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> Houzi Flutter Mobile App</a></li>
+				<li class="doc-nav-item"><a href="#troubleshooting"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Troubleshooting & FAQ</a></li>
+			</ul>
+		</aside>
+
+		<!-- MAIN CONTENT BODY -->
+		<main class="doc-content">
+
+			<!-- SECTION 1: OVERVIEW -->
+			<section id="overview" class="doc-section">
+				<div class="doc-section-header">
+					<h1 class="doc-main-title">AI Search for Houzez — Documentation</h1>
+					<p>Transform your real estate website into an intelligent conversational platform powered by natural language understanding.</p>
+				</div>
+
+				<h2 class="doc-section-title">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+					Overview & Capabilities
+				</h2>
+				<p><strong>AI Search for Houzez</strong> enables website visitors to search for properties in plain, everyday language (e.g. <em>"Modern 4-bedroom villa with swimming pool in Coconut Grove under $2.5M"</em>). The plugin translates their intent into structured WordPress taxonomy queries, renders live results in a split-screen preview panel with dynamic pagination, and allows interactive multi-turn refinements.</p>
+
+				<div class="doc-callout doc-callout-info">
+					<div class="doc-callout-icon">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+					</div>
+					<div class="doc-callout-text">
+						<strong>Houzez Theme Native Integration:</strong> The plugin directly utilizes your existing Houzez taxonomies (Type, Status, City, Area, State, Country, Features, Labels) and custom fields (Bedrooms, Bathrooms, Price, SqFt Area). No manual database migration required.
+					</div>
+				</div>
+
+				<h3 class="doc-sub-title">Key Features:</h3>
+				<ul style="padding-left: 20px; color: var(--slate-700); margin-bottom: 16px;">
+					<li style="margin-bottom: 8px;"><strong>Natural Language Understanding:</strong> Parses price ranges, bedroom/bathroom counts, property types, features, square footage, and lease terms.</li>
+					<li style="margin-bottom: 8px;"><strong>Location Intelligence Engine:</strong> Automatically resolves neighborhoods, cities, and abbreviations (e.g. "NYC" &rarr; "New York", "SoHo" &rarr; "Manhattan").</li>
+					<li style="margin-bottom: 8px;"><strong>Multi-Model AI Backbone:</strong> Direct native support for OpenAI (ChatGPT), Anthropic (Claude), and Google (Gemini).</li>
+					<li style="margin-bottom: 8px;"><strong>Interactive Tag Chips & Direct Dropdowns:</strong> Users can remove or click any active filter chip to adjust values on-the-fly without re-calling the LLM.</li>
+					<li style="margin-bottom: 8px;"><strong>Dynamic Notice Synchronization:</strong> Conversational summary notice updates in real-time as users modify chips or apply refinements.</li>
+					<li style="margin-bottom: 8px;"><strong>1-Click Homepage Installer:</strong> Clones your active homepage, preserves existing sections, and inserts the AI Search Hero widget seamlessly.</li>
+				</ul>
+			</section>
+
+			<!-- SECTION 2: INSTALLATION & ACTIVATION -->
+			<section id="installation" class="doc-section">
+				<div class="doc-section-header">
+					<h2 class="doc-section-title">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+						Installation & Plugin Activation
+					</h2>
+					<p>How to install the plugin on your WordPress site running the Houzez theme.</p>
+				</div>
+
+				<ol class="doc-steps">
+					<li class="doc-step-item">
+						<div class="doc-step-title">Upload the Plugin ZIP</div>
+						<p>In your WordPress Admin Dashboard, navigate to <strong>Plugins &rarr; Add New Plugin &rarr; Upload Plugin</strong>. Choose the <span class="doc-code-inline">ai-search-houzez.zip</span> archive and click <strong>Install Now</strong>.</p>
+					</li>
+					<li class="doc-step-item">
+						<div class="doc-step-title">Activate the Plugin</div>
+						<p>Once installation finishes, click <strong>Activate Plugin</strong>. You will see a new menu item labeled <strong>AI Search</strong> in your left admin sidebar.</p>
+					</li>
+					<li class="doc-step-item">
+						<div class="doc-step-title">Activate License</div>
+						<p>Go to <strong>AI Search &rarr; Activation</strong> tab. Enter your Envato Purchase Code / License Key to unlock all AI Search features, custom configuration panels, and official product support.</p>
+					</li>
+
+				</ol>
+			</section>
+
+			<!-- SECTION 3: ENTERING API KEYS -->
+			<section id="api-keys" class="doc-section">
+				<div class="doc-section-header">
+					<h2 class="doc-section-title">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+						Entering API Keys & Provider Setup
+					</h2>
+					<p>Step-by-step instructions on obtaining and configuring your AI provider credentials.</p>
+				</div>
+
+				<p>To enable AI query processing, you need an API key from one of the supported foundation model providers. The key is securely encrypted and stored server-side in WordPress options (never exposed in client JavaScript).</p>
+
+				<h3 class="doc-sub-title">How to Obtain API Keys:</h3>
+
+				<div class="doc-field-card">
+					<div class="doc-field-header">
+						<span class="doc-field-name">1. OpenAI (ChatGPT / GPT-4o / GPT-5)</span>
+						<span class="doc-field-type">openai</span>
+					</div>
+					<p>1. Visit <a href="https://platform.openai.com/api-keys" target="_blank" style="color:var(--primary); font-weight:600;">platform.openai.com/api-keys</a>.<br/>
+					2. Log in or create an account, then click <strong>Create new secret key</strong>.<br/>
+					3. Copy the key (starts with <span class="doc-code-inline">sk-...</span> or <span class="doc-code-inline">sk-proj-...</span>).<br/>
+					4. Paste it into the <strong>API Key</strong> field in the plugin and select <strong>OpenAI (ChatGPT)</strong> as the provider.</p>
+				</div>
+
+				<div class="doc-field-card">
+					<div class="doc-field-header">
+						<span class="doc-field-name">2. Anthropic (Claude 3.5 / Haiku / Sonnet)</span>
+						<span class="doc-field-type">anthropic</span>
+					</div>
+					<p>1. Visit <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--primary); font-weight:600;">console.anthropic.com/settings/keys</a>.<br/>
+					2. Log in to your Anthropic account and click <strong>Create Key</strong>.<br/>
+					3. Copy the key (starts with <span class="doc-code-inline">sk-ant-...</span>).<br/>
+					4. Paste it into the <strong>API Key</strong> field and select <strong>Anthropic (Claude)</strong> as the provider.</p>
+				</div>
+
+				<div class="doc-field-card">
+					<div class="doc-field-header">
+						<span class="doc-field-name">3. Google (Gemini 2.0 / Gemini 3 Flash)</span>
+						<span class="doc-field-type">gemini</span>
+					</div>
+					<p>1. Visit <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--primary); font-weight:600;">aistudio.google.com/app/apikey</a>.<br/>
+					2. Click <strong>Create API key</strong> in Google AI Studio.<br/>
+					3. Copy the generated key (starts with <span class="doc-code-inline">AIzaSy...</span>).<br/>
+					4. Paste it into the <strong>API Key</strong> field and select <strong>Google (Gemini)</strong> as the provider.</p>
+				</div>
+
+				<div class="doc-callout doc-callout-success">
+					<div class="doc-callout-icon">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+					</div>
+					<div class="doc-callout-text">
+						<strong>Verify Instantly:</strong> Always click the <strong>Test Connection</strong> button next to the API Key input. The plugin will execute a lightweight test payload and confirm whether your key is valid and active.
+					</div>
+				</div>
+			</section>
+
+			<!-- SECTION 4: PRIMARY VS LITE MODEL EXPLAINED -->
+			<section id="primary-vs-lite" class="doc-section">
+				<div class="doc-section-header">
+					<h2 class="doc-section-title">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+						Primary Model vs. Lite / Fast Model Explained
+					</h2>
+					<p>Understanding the dual-model architecture and when to use each configuration.</p>
+				</div>
+
+				<p>AI Search for Houzez is architected with a dual-model system to deliver optimal natural language accuracy while maintaining rapid response times and minimal API operational costs.</p>
+
+				<div class="doc-table-wrap">
+					<table class="doc-table">
+						<thead>
+							<tr>
+								<th>Aspect</th>
+								<th>Primary Model</th>
+								<th>Lite / Fast Model</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong>Role in Plugin</strong></td>
+								<td>Handles primary user natural language search queries, multi-turn conversational refinements, complex structured schema tool extraction, and personalized search explanations.</td>
+								<td>Used for background sub-tasks such as fast query classification, real-time suggestion chip generation, and quick prompt rewriting.</td>
+							</tr>
+							<tr>
+								<td><strong>Strengths</strong></td>
+								<td>Maximum reasoning depth, strict adherence to JSON tool calling schemas, accurate nuance detection (e.g. distinguishing between "waterfront" and "city view").</td>
+								<td>Ultra-low latency (&lt;300ms), lightweight token cost, fast execution.</td>
+							</tr>
+							<tr>
+								<td><strong>OpenAI Recommended</strong></td>
+								<td><span class="doc-code-inline">gpt-5-mini</span> or <span class="doc-code-inline">gpt-4o-mini</span></td>
+								<td><span class="doc-code-inline">gpt-5-nano</span> or <span class="doc-code-inline">gpt-4o-mini</span></td>
+							</tr>
+							<tr>
+								<td><strong>Claude Recommended</strong></td>
+								<td><span class="doc-code-inline">claude-haiku-4-5</span> or <span class="doc-code-inline">claude-3-5-haiku-latest</span></td>
+								<td><span class="doc-code-inline">claude-3-5-haiku-latest</span></td>
+							</tr>
+							<tr>
+								<td><strong>Gemini Recommended</strong></td>
+								<td><span class="doc-code-inline">gemini-3-flash-preview</span> or <span class="doc-code-inline">gemini-2.0-flash</span></td>
+								<td><span class="doc-code-inline">gemini-3.1-flash-lite</span> or <span class="doc-code-inline">gemini-2.0-flash-lite</span></td>
+							</tr>
+							<tr>
+								<td><strong>If left blank?</strong></td>
+								<td>Automatically uses the plugin's tested default for the chosen provider.</td>
+								<td>Automatically falls back to the primary model or provider's lite default.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="doc-callout doc-callout-warning">
+					<div class="doc-callout-icon">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+					</div>
+					<div class="doc-callout-text">
+						<strong>Tip for Most Websites:</strong> Leaving both model override fields blank is recommended. The plugin will automatically use the latest, cost-efficient, benchmarked models for your selected provider. Only enter a model name if you specifically wish to override the default (e.g. testing newly released LLM versions).
+					</div>
+				</div>
+			</section>
+
+			<!-- SECTION 5: FIELD-BY-FIELD REFERENCE -->
+			<section id="fields-reference" class="doc-section">
+				<div class="doc-section-header">
+					<h2 class="doc-section-title">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+						Field-by-Field Reference
+					</h2>
+					<p>Detailed explanation of every toggle, field, and control in the plugin dashboard.</p>
+				</div>
+
+				<!-- Field 1 -->
+				<div class="doc-field-card">
+					<div class="doc-field-header">
+						<span class="doc-field-name">1. Enable / Disable AI Search Switch</span>
+						<span class="doc-field-type">Checkbox / Toggle</span>
+					</div>
+					<div class="doc-field-meta">
+						<span><strong>Option Key:</strong> <span class="doc-code-inline">ai_search_houzi_enabled</span></span>
+						<span><strong>Default:</strong> <span class="doc-code-inline">1 (Enabled)</span></span>
+					</div>
+					<p>Master switch for AI Search. When enabled, users can execute natural language searches. When disabled, the frontend hero widget safely falls back to standard input or displays an informational message.</p>
+				</div>
+
+				<!-- Field 2 -->
+				<div class="doc-field-card">
+					<div class="doc-field-header">
+						<span class="doc-field-name">2. AI Provider</span>
+						<span class="doc-field-type">Dropdown Select</span>
+					</div>
+					<div class="doc-field-meta">
+						<span><strong>Option Key:</strong> <span class="doc-code-inline">ai_search_houzi_provider</span></span>
+						<span><strong>Default:</strong> <span class="doc-code-inline">openai</span></span>
+					</div>
+					<p>Selects which AI company's infrastructure handles your search requests. Options: <strong>OpenAI (ChatGPT)</strong>, <strong>Anthropic (Claude)</strong>, or <strong>Google (Gemini)</strong>. Switching providers adjusts the underlying API endpoints and tool calling schemas automatically.</p>
+				</div>
+
+				<!-- Field 3 -->
+				<div class="doc-field-card">
+					<div class="doc-field-header">
+						<span class="doc-field-name">3. API Key</span>
+						<span class="doc-field-type">Password / Text Input</span>
+					</div>
+					<div class="doc-field-meta">
+						<span><strong>Option Key:</strong> <span class="doc-code-inline">ai_search_houzi_api_key</span></span>
+					</div>
+					<p>Your authentication key from OpenAI, Anthropic, or Google. Keys are masked with password bullets for privacy. To test whether the key works, click <strong>Test Connection</strong>.</p>
+				</div>
+
+				<!-- Field 4 -->
+				<div class="doc-field-card">
+					<div class="doc-field-header">
+						<span class="doc-field-name">4. Primary Model Override</span>
+						<span class="doc-field-type">Text Input</span>
+					</div>
+					<div class="doc-field-meta">
+						<span><strong>Option Key:</strong> <span class="doc-code-inline">ai_search_houzi_model</span></span>
+						<span><strong>Default:</strong> <span class="doc-code-inline">Empty (Auto Default)</span></span>
+					</div>
+					<p>Allows specifying a custom model string if you wish to use a specific model version (e.g. <span class="doc-code-inline">gpt-5-mini</span>, <span class="doc-code-inline">claude-haiku-4-5</span>, or <span class="doc-code-inline">gemini-3-flash-preview</span>). Leave blank to use provider defaults.</p>
+				</div>
+
+				<!-- Field 5 -->
+				<div class="doc-field-card">
+					<div class="doc-field-header">
+						<span class="doc-field-name">5. Lite / Fast Model Override</span>
+						<span class="doc-field-type">Text Input</span>
+					</div>
+					<div class="doc-field-meta">
+						<span><strong>Option Key:</strong> <span class="doc-code-inline">ai_search_houzi_lite_model</span></span>
+						<span><strong>Default:</strong> <span class="doc-code-inline">Empty (Auto Default)</span></span>
+					</div>
+					<p>Allows specifying an ultra-fast, lightweight model string for sub-tasks (e.g. <span class="doc-code-inline">gpt-5-nano</span>, <span class="doc-code-inline">gemini-3.1-flash-lite</span>).</p>
+				</div>
+
+				<!-- Field 6 -->
+				<div class="doc-field-card" id="system-prompt">
+					<div class="doc-field-header">
+						<span class="doc-field-name">6. Custom System Prompt Guidelines</span>
+						<span class="doc-field-type">Textarea</span>
+					</div>
+					<div class="doc-field-meta">
+						<span><strong>Option Key:</strong> <span class="doc-code-inline">ai_search_houzi_system_prompt</span></span>
+						<span><strong>Default:</strong> <span class="doc-code-inline">Empty</span></span>
+					</div>
+					<p>Allows you to inject custom business rules or domain guidelines into the AI prompt. For example:</p>
+					<div class="doc-code-block">Always prioritize properties in Miami Beach when users ask for coastal homes.
+When a user asks for luxury, filter max_price above $1,500,000 and include 'swimming-pool' feature.</div>
+				</div>
+
+				<!-- Field 7 -->
+				<div class="doc-field-card" id="location-aliases">
+					<div class="doc-field-header">
+						<span class="doc-field-name">7. Location Resolver & Custom Aliases</span>
+						<span class="doc-field-type">Table / Key-Value Mapping</span>
+					</div>
+					<div class="doc-field-meta">
+						<span><strong>Option Key:</strong> <span class="doc-code-inline">ai_search_houzi_location_aliases</span></span>
+					</div>
+					<p>Maps colloquial names, regional nicknames, and abbreviations directly to real WordPress location taxonomy terms. For example, mapping <strong>"SoHo"</strong> &rarr; <strong>Manhattan (Area)</strong> or <strong>"The Big Apple"</strong> &rarr; <strong>New York (City)</strong>.</p>
+					<p>Also includes a <strong>Location Misses Log</strong>, which tracks location queries entered by real users that were not found in your database so you can easily add aliases with one click.</p>
+				</div>
+
+				<!-- Field 8 -->
+				<div class="doc-field-card" id="homepage-installer">
+					<div class="doc-field-header">
+						<span class="doc-field-name">8. 1-Click Homepage Installer</span>
+						<span class="doc-field-type">Action Button / Installer</span>
+					</div>
+					<p>Automatically generates or updates an <strong>"AI Smart Home"</strong> page in Elementor containing the AI Search Hero widget with dynamic suggested search prompts, and sets it as your site Front Page (<span class="doc-code-inline">page_on_front</span>).</p>
+					<p>Includes a <strong>"Preserve current homepage sections"</strong> checkbox: when checked, it deep-copies all sections from your currently active homepage and inserts the AI Hero cleanly at the top.</p>
+				</div>
+
+				<!-- Field 9 -->
+				<div class="doc-field-card" id="rate-limiting">
+					<div class="doc-field-header">
+						<span class="doc-field-name">9. Rate Limiting & Safety Caps</span>
+						<span class="doc-field-type">Number Inputs</span>
+					</div>
+					<div class="doc-field-meta">
+						<span><strong>Max Searches / User / Hour:</strong> <span class="doc-code-inline">ai_search_houzi_rate_per_user_hour (Default: 30)</span></span>
+						<span><strong>Max Searches / Site / Day:</strong> <span class="doc-code-inline">ai_search_houzi_rate_per_site_day (Default: 500)</span></span>
+					</div>
+					<p>Protects your website and API budget from abuse or scraping bots. User limits apply per IP address (or user ID when logged in). Site-wide limits ensure your monthly AI API spending stays under a predictable safety cap.</p>
+				</div>
+			</section>
+
+			<!-- SECTION 6: HOUZI FLUTTER MOBILE APP -->
+			<section id="houzi-app" class="doc-section">
+				<div class="doc-section-header">
+					<h2 class="doc-section-title">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+						Houzi Mobile App Ecosystem
+					</h2>
+					<p>Publish native iOS and Android real estate apps for your Houzez platform.</p>
+				</div>
+
+				<p><strong>Houzi</strong> is the official white-label Flutter mobile app for the Houzez WordPress theme. It connects directly with your WordPress database via REST API to deliver a 60fps native experience on iPhones, iPads, and Android devices.</p>
+
+				<div class="doc-table-wrap">
+					<table class="doc-table">
+						<thead>
+							<tr>
+								<th>Feature</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong>Real-Time Sync</strong></td>
+								<td>Any property added, edited, or deleted in your WordPress admin updates in the mobile app immediately.</td>
+							</tr>
+							<tr>
+								<td><strong>Houzi AI Search</strong></td>
+								<td>Native mobile natural language property search powered by the same AI gateway.</td>
+							</tr>
+							<tr>
+								<td><strong>Push Notifications</strong></td>
+								<td>Send instant alerts to buyers when new matching properties are published or price drops occur.</td>
+							</tr>
+							<tr>
+								<td><strong>Agent CRM & Inquiries</strong></td>
+								<td>Direct WhatsApp chat, phone calls, and email inquiries directly from listing pages.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<p>Learn more and test live demo builds at <a href="https://houzi.booleanbites.com/" target="_blank" style="color:var(--primary); font-weight:700;">houzi.booleanbites.com</a>.</p>
+			</section>
+
+			<!-- SECTION 7: TROUBLESHOOTING & FAQ -->
+			<section id="troubleshooting" class="doc-section">
+				<div class="doc-section-header">
+					<h2 class="doc-section-title">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+						Troubleshooting & Frequently Asked Questions
+					</h2>
+					<p>Common issues and resolutions.</p>
+				</div>
+
+				<h3 class="doc-sub-title">Q: "API Test Connection failed. What should I check?"</h3>
+				<p>1. Ensure your API key is correctly copied without leading or trailing spaces.<br/>
+				2. Verify that your OpenAI, Anthropic, or Google Cloud account has active billing/credits enabled.<br/>
+				3. Check that your server firewall allows outbound HTTPS requests to <span class="doc-code-inline">api.openai.com</span>, <span class="doc-code-inline">api.anthropic.com</span>, or <span class="doc-code-inline">generativelanguage.googleapis.com</span>.</p>
+
+				<h3 class="doc-sub-title">Q: "Why does the search say 'No Matching Properties Found'?"</h3>
+				<p>The AI accurately extracted the query filters, but your WordPress database currently has no published property matching that exact combination (e.g. 5 beds + specific neighborhood + price cap). Broaden your search or check your listing taxonomies in WordPress.</p>
+
+				<h3 class="doc-sub-title">Q: "How do I reset my homepage back to default Houzez?"</h3>
+				<p>In WordPress Admin, navigate to <strong>Settings &rarr; Reading</strong>, and select your original Houzez homepage (e.g. <em>Home Default</em>) under <strong>Homepage</strong>.</p>
+			</section>
+
+		</main>
+	</div>
+
+	<!-- FOOTER -->
+	<footer class="doc-footer">
+		<p>&copy; 2026 <a href="https://booleanbites.com/" target="_blank">BooleanBites Ltd.</a> AI Search and Houzi real estate app are products of BooleanBites Ltd. &bull; All rights reserved.</p>
+	</footer>
+
+	<!-- INTERACTIVE SCRIPT -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Search filter
+			const searchInput = document.getElementById('doc-filter-input');
+			const sections = document.querySelectorAll('.doc-section');
+			const fieldCards = document.querySelectorAll('.doc-field-card');
+
+			searchInput.addEventListener('input', function(e) {
+				const term = e.target.value.toLowerCase().trim();
+				if (!term) {
+					sections.forEach(s => s.style.display = '');
+					fieldCards.forEach(c => c.style.display = '');
+					return;
+				}
+
+				fieldCards.forEach(card => {
+					const text = card.textContent.toLowerCase();
+					card.style.display = text.includes(term) ? '' : 'none';
+				});
+
+				sections.forEach(sec => {
+					const text = sec.textContent.toLowerCase();
+					sec.style.display = text.includes(term) ? '' : 'none';
+				});
+			});
+
+			// Active navigation spy
+			const navLinks = document.querySelectorAll('.doc-nav-item a');
+			window.addEventListener('scroll', function() {
+				let fromTop = window.scrollY + 100;
+				navLinks.forEach(link => {
+					const section = document.querySelector(link.getAttribute('href'));
+					if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+						navLinks.forEach(l => l.classList.remove('active'));
+						link.classList.add('active');
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
